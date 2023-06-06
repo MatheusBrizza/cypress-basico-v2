@@ -17,10 +17,11 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
     
     it.only('preenche os campos obrigatórios e envia o formulário', function() {
+        const textoLongo = 'Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste,'
         cy.get('#firstName').type('Matheus')
         cy.get('#lastName').type('Brizola')
         cy.get('#email').type('matheus@teste.com')
-        cy.get('#open-text-area').type('teste')
+        cy.get('#open-text-area').type(textoLongo, {delay: 0 })
         cy.get('button[type="submit"]').click()
         cy.get('.success').should('be.visible')
     })
