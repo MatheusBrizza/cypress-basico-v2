@@ -16,7 +16,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT')
     })
     
-    it.only('preenche os campos obrigatórios e envia o formulário', function() {
+    it('preenche os campos obrigatórios e envia o formulário', function() {
         const textoLongo = 'Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste,'
         cy.get('#firstName').type('Matheus')
         cy.get('#lastName').type('Brizola')
@@ -24,6 +24,15 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#open-text-area').type(textoLongo, {delay: 0 })
         cy.get('button[type="submit"]').click()
         cy.get('.success').should('be.visible')
+    })
+
+    it.only('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function() {
+        cy.get('#firstName').type('Matheus')
+        cy.get('#lastName').type('Brizola')
+        cy.get('#email').type('matheus.teste.com')
+        cy.get('#open-text-area').type('teste')
+        cy.get('button[type="submit"]').click()
+        cy.get('.error').should('be.visible')
     })
 })
 
