@@ -133,8 +133,8 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     it.only('seleciona um arquivo da pasta fixtures', function() {
         cy.get('input[type="file"]')
         .selectFile('cypress/fixtures/example.json')
-        .then(input => {
-            expect(input[0].files[0].name).to.equal('example.json')
+        .should(function($input) {
+            expect($input[0].files[0].name).to.equal('example.json')
         })
     })
 })
