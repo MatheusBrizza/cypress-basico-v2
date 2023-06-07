@@ -41,7 +41,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         .should('have.value', '')
     })
 
-    it.only('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function() {
+    it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function() {
         cy.get('#firstName').type('Matheus')
         cy.get('#lastName').type('Brizola')
         cy.get('#email').type('matheus@teste.com')
@@ -50,6 +50,37 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('button[type="submit"]').click()
         cy.get('.error').should('be.visible')
     })
+
+    it('preenche e limpa os campos nome, sobrenome, email e telefone', function() {
+        cy.get('#firstName')
+        .type('Matheus')
+        .should('have.value', 'Matheus')
+        .clear()
+        .should('be.empty')
+        cy.get('#lastName')
+        .type('Brizola')
+        .should('have.value', 'Brizola')
+        .clear()
+        .should('be.empty')
+        cy.get('#email')
+        .type('matheus@teste.com')
+        .should('have.value', 'matheus@teste.com')
+        .clear()
+        .should('be.empty')
+        cy.get('#phone')
+        .type('123456789')
+        .should('have.value', '123456789')
+        .clear()
+        .should('be.empty')
+
+    })
+
+    it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function() {
+        cy.get('button[type="submit"]').click()
+        cy.get('.error').should('be.visible')
+    })
+
+
 })
 
 
