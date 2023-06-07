@@ -119,14 +119,24 @@ describe('Central de Atendimento ao Cliente TAT', function() {
 
     // Exercícios aula 5 - checkbox
 
-    it.only('marca ambos checkboxes, depois desmarca o último', function() {
+    it('marca ambos checkboxes, depois desmarca o último', function() {
         cy.get('input[type=checkbox]')
         .check()
+        .should('be.checked')
         .last()
         .uncheck()
         .should('not.be.checked')
     })
 
+    // Exercícios aula 6 - upload de arquivos
+
+    it.only('seleciona um arquivo da pasta fixtures', function() {
+        cy.get('input[type="file"]')
+        .selectFile('cypress/fixtures/example.json')
+        .then(input => {
+            expect(input[0].files[0].name).to.equal('example.json')
+        })
+    })
 })
 
 
