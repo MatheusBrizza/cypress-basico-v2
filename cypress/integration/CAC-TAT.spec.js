@@ -104,10 +104,12 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     // Exercícios aula 4 - radio
 
     it.only('marca o tipo de atendimento "Feedback"', function() {
-        cy.get(':nth-child(4) > input').check().should('have.value', 'feedback')
+        cy.get('input[type="radio"][value="feedback"]')
+        .check()
+        .should('have.value', 'feedback')
     })
 
-    
+
 })
 
 
