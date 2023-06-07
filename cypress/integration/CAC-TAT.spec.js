@@ -110,7 +110,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     })
 
     it('marca cada tipo de atendimento', function() {
-        cy.get('input[type="radio"]')
+        cy.get('input[type="radio"]').check()
         .each(function($radio) {
             cy.wrap($radio).check().should('be.checked')
         })
@@ -120,10 +120,11 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     // Exercícios aula 5 - checkbox
 
     it.only('marca ambos checkboxes, depois desmarca o último', function() {
-        cy.get('input[type=checkbox]').each(function($checkbox) {
-            cy.wrap($checkbox).check().should('be.checked')
-        })
-        cy.get('#phone-checkbox').uncheck()
+        cy.get('input[type=checkbox]')
+        .check()
+        .last()
+        .uncheck()
+        .should('not.be.checked')
     })
 
 })
