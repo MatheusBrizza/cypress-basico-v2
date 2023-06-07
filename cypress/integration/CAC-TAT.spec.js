@@ -12,6 +12,8 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.visit('./src/index.html')
     })
 
+    //Exercícios aula 2
+
     it('verifica o título da aplicação', function() {
         cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT')
     })
@@ -83,6 +85,12 @@ describe('Central de Atendimento ao Cliente TAT', function() {
     it('envia o formuário com sucesso usando um comando customizado', function() {
         cy.fillMandatoryFieldsAndSubmit()
         cy.get('.success').should('be.visible')
+    })
+
+    // Exercícios aula 3
+
+    it.only('seleciona um produto (YouTube) por seu texto', function() {
+        cy.get('#product').select('YouTube').should('have.value', 'youtube')
     })
 })
 
