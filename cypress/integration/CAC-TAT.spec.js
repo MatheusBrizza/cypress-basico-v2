@@ -97,9 +97,17 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.get('#product').select('mentoria').should('have.value', 'mentoria')
     })
 
-    it.only('seleciona um produto (Blog) por seu índice', function() {
+    it('seleciona um produto (Blog) por seu índice', function() {
         cy.get('#product').select(1).should('have.value', 'blog')
     })
+
+    // Exercícios aula 4 - radio
+
+    it.only('marca o tipo de atendimento "Feedback"', function() {
+        cy.get(':nth-child(4) > input').check().should('have.value', 'feedback')
+    })
+
+    
 })
 
 
