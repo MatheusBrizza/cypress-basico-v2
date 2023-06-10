@@ -130,12 +130,45 @@ describe('Central de Atendimento ao Cliente TAT', function() {
 
     // Exercícios aula 6 - upload de arquivos
 
-    it.only('seleciona um arquivo da pasta fixtures', function() {
+    it('seleciona um arquivo da pasta fixtures', function() {
         cy.get('input[type="file"]')
         .selectFile('cypress/fixtures/example.json')
         .should(function($input) {
             expect($input[0].files[0].name).to.equal('example.json')
         })
+    })
+
+    it('seleciona um arquivo simulando um drag-and-drop', function() {
+        cy.get('input[type="file"]')
+        .selectFile('cypress/fixtures/example.json', {action: 'drag-drop'})
+        .should(function($input) {
+            expect($input[0].files[0].name).to.equal('example.json')
+        })
+    })
+
+    it('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', function() {
+        cy.fixture('example.json', { encoding: null }).as('exampleFile') 
+        cy.get('input[type="file"]')
+        .selectFile('@exampleFile')
+        .should(function($input) {
+            expect($input[0].files[0].name).to.equal('example.json')
+        })
+    })
+
+    // Exercícios aula 7 - links que abrem em outra aba
+
+
+    it('verifica que a política de privacidade abre em outra aba sem a necessidade de um clique', function() {
+        cy.get('#privacy a').should('have.attr', 'target', '_blank')
+    })
+
+    it('acessa a página da política de privacidade removendo o target e então clicando no link', function() {
+        cy.get('#privacy a').invoke('removeAttr', 'target').click()
+        cy.contains('Talking About Testing').should('be.visible')
+    })
+
+    it('testa a página da política de privacidade de forma independente', function() {
+        cy.get('#privacy a').invoke('removeAttr', 'target').click()
     })
 })
 
