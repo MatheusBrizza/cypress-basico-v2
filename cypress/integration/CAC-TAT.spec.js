@@ -18,14 +18,17 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.title().should('be.equal', 'Central de Atendimento ao Cliente TAT')
     })
     
-    it('preenche os campos obrigatórios e envia o formulário', function() {
+    it.only('preenche os campos obrigatórios e envia o formulário', function() {
         const textoLongo = 'Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste, Teste, teste, teste,'
         cy.get('#firstName').type('Matheus')
         cy.get('#lastName').type('Brizola')
         cy.get('#email').type('matheus@teste.com')
         cy.get('#open-text-area').type(textoLongo, {delay: 0 })
+        cy.clock()
         cy.contains('button', 'Enviar').click()
         cy.get('.success').should('be.visible')
+        cy.tick(3000)
+        cy.get('.success').should('not.be.visible')
     })
 
     it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function() {
