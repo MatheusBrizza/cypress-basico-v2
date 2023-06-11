@@ -214,7 +214,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
 
     // Exercícios aula 11 - cy.request()
 
-    it.only('faz uma requisição HTTP', function() {
+    it('faz uma requisição HTTP', function() {
         cy.request('https://cac-tat.s3.eu-central-1.amazonaws.com/index.html')
         .should(function(response) {
             const { status, statusText, body } = response
@@ -222,6 +222,14 @@ describe('Central de Atendimento ao Cliente TAT', function() {
             expect(statusText).to.equal('OK')
             expect(body).to.include('CAC TAT')
         })
+    })
+
+    // Desafio final aula 12 - achar o gato
+
+    it.only('encontrar o gato', function() {
+        cy.get('#cat')
+        .invoke('show')
+        .should('be.visible')
     })
 })
 
